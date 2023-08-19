@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Container from '@/components/Container.vue'
+import CronEditor from '@/components/CronEditor.vue'
+import CronBuilder from '@/components/CronBuilder'
 </script>
 
 <template lang="pug">
@@ -11,5 +13,6 @@ v-app
     )
     v-main
       Container
-        h2 test
+        CronEditor
+        CronBuilder
 </template>
