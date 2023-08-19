@@ -11,17 +11,17 @@ const containerWidth = computed(() => {
     case 'xs':
       return '100%'
     case 'sm':
-      return '85%'
+      return '80%'
     case 'md':
-      return '75%'
-    case 'lg':
-      return '75%'
-    case 'xl':
       return '60%'
+    case 'lg':
+      return '50%'
+    case 'xl':
+      return '50%'
     case 'xxl':
       return '50%'
     default:
-      return '75%'
+      return '50%'
   }
 })
 </script>
