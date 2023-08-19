@@ -10,7 +10,7 @@ import {
 } from '@/plugins/vuelidateValidators'
 
 import type { ComputedRef } from 'vue'
-import type { CronValues } from '@/components/CronBuilder/types'
+import type { CronValues } from '@/components/CronParser/types'
 import type { BaseValidation } from '@vuelidate/core'
 
 export const useCronValidation = (cronValues: CronValues) => {

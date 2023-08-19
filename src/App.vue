@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Container from '@/components/Container.vue'
 import CronEditor from '@/components/CronEditor.vue'
-import CronBuilder from '@/components/CronBuilder'
+import CronParser from '@/components/CronParser'
 </script>
 
 <template lang="pug">
@@ -13,6 +13,6 @@ v-app
     )
     v-main
       Container
-        CronBuilder
+        CronParser
         CronEditor.mt-10(v-if="false")
 </template>
