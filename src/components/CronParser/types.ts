@@ -1,4 +1,8 @@
-import type { Validation, BaseValidation } from '@vuelidate/core';
+import type {
+  Validation,
+  ValidationRule,
+  BaseValidation
+} from '@vuelidate/core'
 
 export interface CronValues {
   minute: String
@@ -15,10 +19,14 @@ export type CronValueKey =
   | 'month'
   | 'dayOfWeek'
 
-  export interface CronValidations extends Validation {
-    minute: BaseValidation;,
-    hour: BaseValidation,
-    dayOfMonth: BaseValidation,
-    month: BaseValidation,
-    isValidDayOfWeek: BaseValidation
-  }
+export interface CronValidations extends Validation {
+  minute: BaseValidation
+  hour: BaseValidation
+  dayOfMonth: BaseValidation
+  month: BaseValidation
+  isValidDayOfWeek: BaseValidation
+}
+
+export interface InputEvent extends Event {
+  target: HTMLInputElement
+}

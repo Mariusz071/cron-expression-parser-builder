@@ -4,7 +4,6 @@ import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 import { APP_BAR_HEIGHT } from '@/common/constants'
 
-console.log(APP_BAR_HEIGHT, 123)
 const { name } = useDisplay()
 
 const containerWidth = computed(() => {

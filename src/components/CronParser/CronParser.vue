@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // imports
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import cronstrue from 'cronstrue'
+import debounce from 'lodash.debounce'
 
 import { useCronValidation } from '@/use/useCronValidation'
 import {
@@ -11,9 +12,12 @@ import {
   monthHint,
   dayOfWeekHint
 } from './consts'
-import type { CronValues } from './types'
+
+import type { Ref } from 'vue'
+import type { CronValues, CronValueKey, InputEvent } from './types'
 ///
 
+// commmon
 const cronValues: CronValues = reactive({
   minute: '',
   hour: '',
@@ -21,6 +25,7 @@ const cronValues: CronValues = reactive({
   month: '',
   dayOfWeek: ''
 })
+///
 
 //validations
 const {
@@ -32,17 +37,31 @@ const {
   errors,
   $v
 } = useCronValidation(cronValues)
+
+const onValueInput = debounce((e: InputEvent, valueKey: CronValueKey) => {
+  $v.value[valueKey].$touch()
+  cronValues[valueKey] = e.target.value
+}, 500)
 ///
 
-const parsedExpression = ref('')
+// expression parsing
+const parsedExpression: Ref<string> = ref('')
 
 const onParse = () => {
   const expressionValues = Object.values(cronValues)
   const expressionString = expressionValues.join(' ')
 
   parsedExpression.value = cronstrue.toString(expressionString)
+  // isParseEnabled.value = false
 }
+///
 
+// UI
+// watch(parsedExpression, () => {
+//   isParseEnabled.value = true
+// })
+
+// const isParseEnabled = ref(false)
 ///
 </script>
 
@@ -51,51 +70,51 @@ v-card
   v-card-text
     v-form.mb-10(@submit="onParse")
       v-text-field.mb-5(
-        v-model="cronValues.minute"
+        :model-value="cronValues.minute"
         label="Minutes"
         dense
         autofocus
         required
         :hint="minutesHint"
         :class="{'v-field--error': minuteErrors.length}"
-        @input="$v.minute.$touch"
+        @input="e => onValueInput(e, 'minute')"
       )
       v-text-field.mb-5(
-        v-model="cronValues.hour"
+        :model-value="cronValues.hour"
         label="Hours"
         dense
         required
         :hint="hoursHint"
         :class="{'v-field--error': hourErrors.length}"
-        @input="$v.hour.$touch"
+        @input="e => onValueInput(e, 'hour')"
       )
 
       v-text-field.mb-5(
-        v-model="cronValues.dayOfMonth"
+        :model-value="cronValues.dayOfMonth"
         label="Day of month"
         dense
         required
         :hint="dayOfMonthHint"
         :class="{'v-field--error': dayOfMonthErrors.length}"
-        @input="$v.dayOfMonth.$touch"
+        @input="e => onValueInput(e, 'dayOfMonth')"
       )
       v-text-field.mb-5(
-        v-model="cronValues.month"
+        :model-value="cronValues.month"
         label="Month"
         dense
         required
         :hint="monthHint"
         :class="{'v-field--error': monthErrors.length}"
-        @input="$v.month.$touch"
+        @input="e => onValueInput(e, 'month')"
       )
       v-text-field.mb-5(
-        v-model="cronValues.dayOfWeek"
+        :model-value="cronValues.dayOfWeek"
         label="Day of week"
         dense
         required
         :hint="dayOfWeekHint"
         :class="{'v-field--error': dayOfWeekErrors.length}"
-        @input="$v.dayOfWeek.$touch"
+        @input="e => onValueInput(e, 'dayOfWeek')"
       )
     v-alert(
       v-if="!!errors.length"
