@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // imports
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, computed, nextTick } from 'vue'
 import cronstrue from 'cronstrue'
 import debounce from 'lodash.debounce'
 
@@ -52,16 +52,20 @@ const onParse = () => {
   const expressionString = expressionValues.join(' ')
 
   parsedExpression.value = cronstrue.toString(expressionString)
-  // isParseEnabled.value = false
+  isExpressionParsed.value = true
 }
 ///
 
 // UI
-// watch(parsedExpression, () => {
-//   isParseEnabled.value = true
-// })
+watch(cronValues, () => {
+  isExpressionParsed.value = false
+})
 
-// const isParseEnabled = ref(false)
+const isExpressionParsed: Ref<boolean> = ref(false)
+
+const isParseDisabled = computed(
+  () => $v.value.$invalid || (!$v.value.$invalid && isExpressionParsed.value)
+)
 ///
 </script>
 
@@ -132,7 +136,7 @@ v-card
     v-btn.mx-auto(
       color="primary"
       variant="elevated"
-      :disabled="$v.$invalid"
+      :disabled="isParseDisabled"
       @click="onParse"
     ) Parse expression
   
