@@ -20,6 +20,8 @@ const containerWidth = computed(() => {
       return '60%'
     case 'xxl':
       return '50%'
+    default:
+      return '75%'
   }
 })
 </script>

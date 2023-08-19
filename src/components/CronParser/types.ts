@@ -1,8 +1,4 @@
-import type {
-  Validation,
-  ValidationRule,
-  BaseValidation
-} from '@vuelidate/core'
+import type { Validation, BaseValidation } from '@vuelidate/core'
 
 export interface CronValues {
   minute: String

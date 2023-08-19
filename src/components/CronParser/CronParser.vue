@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // imports
-import { reactive, ref, watch, computed, nextTick } from 'vue'
+import { reactive, ref, watch, computed } from 'vue'
 import cronstrue from 'cronstrue'
 import debounce from 'lodash.debounce'
 
+//@ts-ignore - no ide why TS can''t resolve it properly
 import { useCronValidation } from '@/use/useCronValidation'
 import {
   minutesHint,

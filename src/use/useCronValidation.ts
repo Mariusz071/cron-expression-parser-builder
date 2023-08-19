@@ -9,9 +9,7 @@ import {
   isValidDayOfWeek
 } from '@/plugins/vuelidateValidators'
 
-import type { ComputedRef } from 'vue'
 import type { CronValues, CronValidations } from '@/components/CronParser/types'
-import type { BaseValidation } from '@vuelidate/core'
 
 export const useCronValidation = (cronValues: CronValues) => {
   const rules = computed(() => ({
@@ -40,7 +38,7 @@ export const useCronValidation = (cronValues: CronValues) => {
     }
   }))
 
-  //@ts-ignore
+  //@ts-ignore - couldn't figure it out
   const $v = useVuelidate<CronValidations>(rules, cronValues)
 
   const minuteErrors = computed(() => {

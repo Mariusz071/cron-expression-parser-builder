@@ -6,7 +6,7 @@ export const isValidCronMinute = val => {
   const expression = `${val} * * * *`
 
   try {
-    const parsed = cronParser.parseExpression(expression)
+    cronParser.parseExpression(expression)
     return true
   } catch (e: any) {
     const errorMessage = `Invalid minutes value. Error: ${e.message}.`
@@ -19,7 +19,7 @@ export const isValidCronHour = val => {
   const expression = `* ${val} * * *`
 
   try {
-    const parsed = cronParser.parseExpression(expression)
+    cronParser.parseExpression(expression)
     return true
   } catch (e: any) {
     const errorMessage = `Invalid hour value. Error: ${e.message}.`
@@ -32,7 +32,7 @@ export const isValidCronDayOfMonth = val => {
   const expression = `* * ${val} * *`
 
   try {
-    const parsed = cronParser.parseExpression(expression)
+    cronParser.parseExpression(expression)
     return true
   } catch (e: any) {
     const errorMessage = `Invalid day of month value. Error: ${e.message}.`
@@ -45,7 +45,7 @@ export const isValidMonth = val => {
   const expression = `* * * ${val} *`
 
   try {
-    const parsed = cronParser.parseExpression(expression)
+    cronParser.parseExpression(expression)
     return true
   } catch (e: any) {
     const errorMessage = `Invalid month value. Error: ${e.message}.`
@@ -58,7 +58,7 @@ export const isValidDayOfWeek = val => {
   const expression = `* * *  * ${val}`
 
   try {
-    const parsed = cronParser.parseExpression(expression)
+    cronParser.parseExpression(expression)
     return true
   } catch (e: any) {
     const errorMessage = `Invalid day of week value. Error: ${e.message}.`
