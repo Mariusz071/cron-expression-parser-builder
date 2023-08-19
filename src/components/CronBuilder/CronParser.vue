@@ -48,7 +48,6 @@ const onParse = () => {
 
 <template lang="pug">
 v-card
-  v-card-title Cron Builder
   v-card-text
     v-form.mb-10(@submit="onParse")
       v-text-field.mb-5(

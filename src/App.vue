@@ -8,11 +8,11 @@ import CronBuilder from '@/components/CronBuilder'
 v-app
   v-layout
     v-app-bar(
-      title="Datapane Task"
+      title="Cron expression parser"
       color="primary"
     )
     v-main
       Container
-        CronEditor
         CronBuilder
+        CronEditor.mt-10(v-if="false")
 </template>
