@@ -1,14 +1,18 @@
 <script setup lang="ts">
 // imports
-import { reactive, computed } from 'vue'
+import { reactive, ref } from 'vue'
+import cronstrue from 'cronstrue'
+
 import { useCronValidation } from '@/use/useCronValidation'
-import { minutesHint, hoursHint, dayOfMonthHint, monthHint } from './consts'
+import {
+  minutesHint,
+  hoursHint,
+  dayOfMonthHint,
+  monthHint,
+  dayOfWeekHint
+} from './consts'
 import type { CronValues } from './types'
 ///
-
-const onParse = () => {
-  console.log('parse expression')
-}
 
 const cronValues: CronValues = reactive({
   minute: '',
@@ -19,16 +23,34 @@ const cronValues: CronValues = reactive({
 })
 
 //validations
-const { minuteErrors, hourErrors, dayOfMonthErrors, monthErrors, errors, $v } =
-  useCronValidation(cronValues)
+const {
+  minuteErrors,
+  hourErrors,
+  dayOfMonthErrors,
+  monthErrors,
+  dayOfWeekErrors,
+  errors,
+  $v
+} = useCronValidation(cronValues)
+///
+
+const parsedExpression = ref('')
+
+const onParse = () => {
+  const expressionValues = Object.values(cronValues)
+  const expressionString = expressionValues.join(' ')
+
+  parsedExpression.value = cronstrue.toString(expressionString)
+}
+
 ///
 </script>
 
 <template lang="pug">
-v-card(flat)
+v-card
   v-card-title Cron Builder
   v-card-text
-    v-form.mb-10
+    v-form.mb-10(@submit="onParse")
       v-text-field.mb-5(
         v-model="cronValues.minute"
         label="Minutes"
@@ -71,17 +93,33 @@ v-card(flat)
         :class="{'v-field--error': monthErrors.length}"
         @input="$v.month.$touch"
       )
+      v-text-field.mb-5(
+        v-model="cronValues.dayOfWeek"
+        label="Day of week"
+        dense
+        required
+        max-width="150px"
+        :hint="dayOfWeekHint"
+        :class="{'v-field--error': dayOfWeekErrors.length}"
+        @input="$v.dayOfWeek.$touch"
+      )
     v-alert(
       v-if="!!errors.length"
       dense
       type="error"
     )
       code.d-block(v-for="error in errors") {{  error }}
+    v-alert(
+      v-if="!$v.$invalid && !!parsedExpression"
+      type="success"
+    )
+      v-alert-title.mb-1 Parsed cron expression:
+      code {{  parsedExpression }}
   v-card-actions.py-0
     v-btn.mx-auto(
       color="primary"
       variant="elevated"
-      :disabled="errors.length || !Object.values(cronValues).length"
+      :disabled="$v.$invalid"
       @click="onParse"
     ) Parse expression
   

@@ -31,7 +31,7 @@ const change = debounce((text: string) => {
 </script>
 
 <template lang="pug">
-v-card(flat)
+v-card
   v-card-title Cron Editor
   v-card-text
     Codemirror(

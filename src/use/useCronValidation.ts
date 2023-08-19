@@ -1,4 +1,4 @@
-import { computed } from 'vue'
+import { computed, unref, ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
 import {
@@ -8,6 +8,7 @@ import {
   isValidMonth,
   isValidDayOfWeek
 } from '@/plugins/vuelidateValidators'
+
 import type { ComputedRef } from 'vue'
 import type { CronValues } from '@/components/CronBuilder/types'
 import type { BaseValidation } from '@vuelidate/core'
@@ -34,8 +35,8 @@ export const useCronValidation = (cronValues: CronValues) => {
       isValidMonth: isValidMonth(cronValues.month)
     },
     dayOfWeek: {
-      required,
-      isValidDayOfWeek
+      required: helpers.withMessage('Day of week value is required.', required),
+      isValidDayOfWeek: isValidDayOfWeek(cronValues.dayOfWeek)
     }
   }))
 
@@ -61,6 +62,11 @@ export const useCronValidation = (cronValues: CronValues) => {
     return $v.value.month.$errors.map(e => e.$message)
   })
 
+  const dayOfWeekErrors = computed(() => {
+    //@ts-ignore
+    return $v.value.dayOfWeek.$errors.map(e => e.$message)
+  })
+
   const errors = computed(() => {
     return $v.value.$errors.map(e => e.$message)
   })
@@ -70,6 +76,7 @@ export const useCronValidation = (cronValues: CronValues) => {
     hourErrors,
     dayOfMonthErrors,
     monthErrors,
+    dayOfWeekErrors,
     errors,
     $v
   }

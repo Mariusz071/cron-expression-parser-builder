@@ -48,12 +48,20 @@ export const isValidMonth = val => {
     const parsed = cronParser.parseExpression(expression)
     return true
   } catch (e: any) {
-    const errorMessage = `Invalid day month value. Error: ${e.message}.`
+    const errorMessage = `Invalid month value. Error: ${e.message}.`
     return helpers.withMessage(errorMessage, () => false)
   }
 }
 
 export const isValidDayOfWeek = val => {
-  console.log('isValidDayOfWeek', val)
-  return true
+  // this way cronParser will throw only errors related to minutes part
+  const expression = `* * *  * ${val}`
+
+  try {
+    const parsed = cronParser.parseExpression(expression)
+    return true
+  } catch (e: any) {
+    const errorMessage = `Invalid day of week value. Error: ${e.message}.`
+    return helpers.withMessage(errorMessage, () => false)
+  }
 }
