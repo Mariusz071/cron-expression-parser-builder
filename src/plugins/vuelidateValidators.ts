@@ -15,7 +15,7 @@ export const isValidCronMinute = val => {
 }
 
 export const isValidCronHour = val => {
-  // this way cronParser will throw only errors related to minutes part
+  // this way cronParser will throw only errors related to hour part
   const expression = `* ${val} * * *`
 
   try {
@@ -28,7 +28,7 @@ export const isValidCronHour = val => {
 }
 
 export const isValidCronDayOfMonth = val => {
-  // this way cronParser will throw only errors related to minutes part
+  // this way cronParser will throw only errors related to day of month part
   const expression = `* * ${val} * *`
 
   try {
@@ -41,7 +41,7 @@ export const isValidCronDayOfMonth = val => {
 }
 
 export const isValidMonth = val => {
-  // this way cronParser will throw only errors related to minutes part
+  // this way cronParser will throw only errors related to month part
   const expression = `* * * ${val} *`
 
   try {
@@ -54,7 +54,7 @@ export const isValidMonth = val => {
 }
 
 export const isValidDayOfWeek = val => {
-  // this way cronParser will throw only errors related to minutes part
+  // this way cronParser will throw only errors related to day of week part
   const expression = `* * *  * ${val}`
 
   try {
