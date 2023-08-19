@@ -56,7 +56,6 @@ v-card
         dense
         autofocus
         required
-        max-width="150px"
         :hint="minutesHint"
         :class="{'v-field--error': minuteErrors.length}"
         @input="$v.minute.$touch"
@@ -66,7 +65,6 @@ v-card
         label="Hours"
         dense
         required
-        max-width="150px"
         :hint="hoursHint"
         :class="{'v-field--error': hourErrors.length}"
         @input="$v.hour.$touch"
@@ -77,7 +75,6 @@ v-card
         label="Day of month"
         dense
         required
-        max-width="150px"
         :hint="dayOfMonthHint"
         :class="{'v-field--error': dayOfMonthErrors.length}"
         @input="$v.dayOfMonth.$touch"
@@ -87,7 +84,6 @@ v-card
         label="Month"
         dense
         required
-        max-width="150px"
         :hint="monthHint"
         :class="{'v-field--error': monthErrors.length}"
         @input="$v.month.$touch"
@@ -97,7 +93,6 @@ v-card
         label="Day of week"
         dense
         required
-        max-width="150px"
         :hint="dayOfWeekHint"
         :class="{'v-field--error': dayOfWeekErrors.length}"
         @input="$v.dayOfWeek.$touch"
