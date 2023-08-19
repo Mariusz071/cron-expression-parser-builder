@@ -1,3 +1,5 @@
+import type { Validation, BaseValidation } from '@vuelidate/core';
+
 export interface CronValues {
   minute: String
   hour: String
@@ -12,3 +14,11 @@ export type CronValueKey =
   | 'dayOfMonth'
   | 'month'
   | 'dayOfWeek'
+
+  export interface CronValidations extends Validation {
+    minute: BaseValidation;,
+    hour: BaseValidation,
+    dayOfMonth: BaseValidation,
+    month: BaseValidation,
+    isValidDayOfWeek: BaseValidation
+  }

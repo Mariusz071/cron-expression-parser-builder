@@ -1,4 +1,4 @@
-import { computed, unref, ref } from 'vue'
+import { computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
 import {
@@ -10,7 +10,7 @@ import {
 } from '@/plugins/vuelidateValidators'
 
 import type { ComputedRef } from 'vue'
-import type { CronValues } from '@/components/CronParser/types'
+import type { CronValues, CronValidations } from '@/components/CronParser/types'
 import type { BaseValidation } from '@vuelidate/core'
 
 export const useCronValidation = (cronValues: CronValues) => {
@@ -40,30 +40,26 @@ export const useCronValidation = (cronValues: CronValues) => {
     }
   }))
 
-  const $v = useVuelidate(rules, cronValues)
+  //@ts-ignore
+  const $v = useVuelidate<CronValidations>(rules, cronValues)
 
   const minuteErrors = computed(() => {
-    //@ts-ignore
     return $v.value.minute.$errors.map(e => e.$message)
   })
 
   const hourErrors = computed(() => {
-    //@ts-ignore
     return $v.value.hour.$errors.map(e => e.$message)
   })
 
   const dayOfMonthErrors = computed(() => {
-    //@ts-ignore
     return $v.value.dayOfMonth.$errors.map(e => e.$message)
   })
 
   const monthErrors = computed(() => {
-    //@ts-ignore
     return $v.value.month.$errors.map(e => e.$message)
   })
 
   const dayOfWeekErrors = computed(() => {
-    //@ts-ignore
     return $v.value.dayOfWeek.$errors.map(e => e.$message)
   })
 
