@@ -1,46 +1,27 @@
-# datapane-task
+# Cron Expression parser / builder like component
 
-This template should help get you started developing with Vue 3 in Vite.
+## How to run?
 
-## Recommended IDE Setup
+- open up termminal within project directory
+- run `npm i` to install required dependencies
+- to spin up SPA dev server run `npm run dev` command
+- to open up Storybook run `npm run storybook`
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## What is cron expression?
 
-## Type Support for `.vue` Imports in TS
+A cron expression is a string format used to define schedules for tasks in Unix-like operating systems. It is named after the "cron" daemon, which is responsible for executing scheduled tasks automatically at specified intervals. Cron expressions consist of five (or six) fields that define the timing of a task's execution:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Minute (0-59): Specifies the minute of the hour when the task should run.
+- Hour (0-23): Specifies the hour of the day when the task should run.
+- Day of the month (1-31): Specifies the day of the month when the task should run.
+- Month (1-12): Specifies the month when the task should run.
+- Day of the week (0-6): Specifies the day of the week when the task should run (Sunday is typically 0 or 7).
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Additionally, there's an optional sixth field, which is often included in cron expressions (not included in this component, yet):
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- Year: Specifies the year when the task should run. This field is not supported in all cron implementations.
 
-## Customize configuration
+## What this component does?
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- helps to build valid cron expression
+- validates provided cron expression
